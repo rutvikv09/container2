@@ -1,0 +1,58 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: container2-deployment
+  labels:
+    app: container2
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: container2
+  template:
+    metadata:
+      labels:
+        app: container2
+    spec:
+      containers:
+        - name: container2
+          image: rutvikvaghani/container2:la
+          imagePullPolicy: Always
+          volumeMounts:
+            - mountPath: /container1/temp_dir
+              name: persistent-volume
+          ports:
+            - containerPort: 9090
+      volumes:
+        - name: persistent-volume
+          persistentVolumeClaim:
+            claimName: k8s-pvc-update
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: container2-service
+spec:
+  selector:
+    app: container2
+  ports:
+    - protocol: TCP
+      port: 9090
+      targetPort: 9090
+
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: k8s-pvc-update
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 1Gi
+  storageClassName: standard  # Specifies the storage class name to use
+
+
+
