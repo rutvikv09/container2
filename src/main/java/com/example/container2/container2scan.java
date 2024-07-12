@@ -27,7 +27,6 @@ public class container2scan {
 
         Map<String, Object> output = new HashMap<>();
         calculateFile(output, file, product);
-        //test1
         return ResponseEntity.ok(output);
     }
 
