@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
         - name: container2
-          image: rutvikvaghani/container2:la
+          image: us-central1-docker.pkg.dev/tranquil-buffer-429021-s5/container-repository/container2:la
           imagePullPolicy: Always
           volumeMounts:
             - mountPath: /container1/temp_dir
