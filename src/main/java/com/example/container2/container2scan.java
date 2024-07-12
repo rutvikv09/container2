@@ -68,6 +68,7 @@ public class container2scan {
 
             output.put("file", file);
             output.put("sum", sum);
+            //conteinr2 testt
         } catch (FileNotFoundException e) {
             output.put("file", file);
             output.put("error", "File not found.");
